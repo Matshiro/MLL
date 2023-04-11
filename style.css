@@ -28,6 +28,7 @@ background: linear-gradient(to right, #ffdde1, #ee9ca7);
 
 height: 100vh;
 height: 100dvh;
+overflow: hidden;
 
 display: flex;
 
@@ -89,6 +90,24 @@ input{
     background: none;
 }
 
+select{
+    background: none;
+    border: none;
+    border-bottom: 2px dotted #000;
+
+}
+
+#read{
+    color: var(--font-color-user-input);
+    min-width: 100%;
+    font-size: var(--font-size-user-input);
+    border-bottom: 2px dotted #fff;
+}
+
+option{
+    color: #000;
+}
+
 .validationBlock{
     color: var(--font-color-user-validation);
     opacity: 80%;
@@ -141,29 +160,51 @@ main{
 }
 
 #booksGrid{
-    width: 50%;
-    min-width: 40rem;
-    padding: 3rem 0;
+    min-width: 20rem;
+    width: 85%;
+    height: 65%;
+    padding: 2rem 0rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, 20rem);
-    grid-template-rows: repeat(auto-fit, 15rem);
+    grid-template-columns: repeat(auto-fill, 20rem);
+    grid-template-rows: repeat(auto-fill, 15rem);
+    overflow: auto;
+    justify-content: center;
+    gap: 1rem;
 }
 
 .gridBox{
     display: flex;
     flex-direction: column;
-    gap: .5rem;
+    gap: 1rem;
     align-items: left;
     justify-content: center;
-    background-color: #f48db4;
+    background-color: #ee97b8c9;
     padding-left: 2rem;
+}
+
+.bookDelete{
+    max-width: fit-content;
+    background: none;
+    border: none;
+    align-self: end;
+    padding-right: 2rem;
+}
+
+.bookDelete:hover{
+    cursor: pointer;
+}
+
+#trashbin{
+    max-width: 1.5rem;
+    max-height: 1.5rem;
+    
 }
 
 .read{
     border: 1px solid green;
 }
 
-.undread{
+.unread{
     border: 1px solid red;
 }
 
