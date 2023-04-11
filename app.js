@@ -1,4 +1,4 @@
-const deleteButtons = document.querySelectorAll(".bookDelete");
+
 const booksReadValue = document.getElementById("infoRead");
 const booksUnreadValue = document.getElementById("infoUnread");
 const booksTotal = document.getElementById("infoTotal");
@@ -23,14 +23,6 @@ function handleSubmit(event){
 
     event.target.reset();
 }
-
-deleteButtons.forEach(function(deleteButton){
-    deleteButton.addEventListener('click', function(){
-        let gridBox = deleteButton.closest('.gridBox');
-        console.log(gridBox.firstChild.textContent);
-        // gridBox.remove();
-    })
-});
 
 function addNewBook(title, author, published, pages, read){
     let book = [title, author, published, pages, read]

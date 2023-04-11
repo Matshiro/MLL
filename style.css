@@ -28,7 +28,6 @@ background: linear-gradient(to right, #ffdde1, #ee9ca7);
 
 height: 100vh;
 height: 100dvh;
-overflow: hidden;
 
 display: flex;
 
@@ -53,12 +52,12 @@ align-items: center;
     color: #FFF;
     font-weight: bold;
     font-size: var(--font-size-logo);
-    padding: 2rem 0;
+    padding: 10% 0;
 }
 
 #userInfo{
     width: 90%;
-    padding: 2rem 0;
+    padding: 10% 0;
 }
 
 .helpText{
@@ -120,7 +119,7 @@ option{
     min-width: min-content;
     max-width: fit-content;
     background-color: #0F2027;
-    padding: 1rem;
+    padding: 1em;
     align-self: center;
 }
 
@@ -216,4 +215,18 @@ main{
 #bookAuthor{
     font-size: var(--font-size-books-author);
     font-weight: 600;
+}
+
+@media screen and (max-height: 1000px)  {
+    #logo{
+        padding:0;
+    }
+    
+    #userInfo{
+    padding: 0;
+    }   
+    
+    #buttonAddBook{
+        padding: 0.5em;
+    }
 }
