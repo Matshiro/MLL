@@ -13,7 +13,37 @@
             CheckBook
         </div>
         <div id="userInfo">
-            <form action=""></form>
+            <form action="#">
+                <div class="inputBlock">
+                    <div class="helpText">What is the title of the book?</div>
+                    <input id="userTitle" type="text" name="title" required minlength="1">
+                    <div class="validationBlock">
+                        Please fill out this field.
+                    </div>
+                </div>
+                <div class="inputBlock">
+                    <div class="helpText">Who is the author of the book?</div>
+                    <input id="userAuthor" type="text" name="author" require minlength="1">
+                    <div class="validationBlock">
+                        Please fill out this field.
+                    </div>
+                </div>
+                <div class="inputBlock">
+                    <div class="helpText">When it was published?</div>
+                    <input id="userPublished" type="date" name="published" required placeholder="Who is the author of the book?">
+                    <div class="validationBlock">
+                        Please fill out this field.
+                    </div>
+                </div>
+                <div class="inputBlock">
+                    <div class="helpText">How many pages are in the book?</div>
+                    <input id="userPages" type="number" name="pages" min="1" required>
+                    <div class="validationBlock" id="validationPages">
+                        Please fill out this field.
+                    </div>
+                </div>
+                <input type="button" value="ADD NEW BOOK" id="buttonAddBook">
+            </form>
         </div>
         <footer>
             Created by Matshiro

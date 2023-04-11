@@ -4,8 +4,14 @@
 :root{
     --font-size-logo: 48px;
     --font-size-info-book: 18px;
+    --font-size-user-input: 22px;
+    --font-size-user-validation: 20px;
     --font-size-books-author: 20px;
     --font-size-books-title: 24px;
+
+    --font-color-user-input: #FFF;
+    --font-color-user-validation: red;
+    --font-color-book: #000;
 }
 
 
@@ -47,6 +53,61 @@ align-items: center;
     font-weight: bold;
     font-size: var(--font-size-logo);
     padding: 2rem 0;
+}
+
+#userInfo{
+    width: 90%;
+    padding: 2rem 0;
+}
+
+.helpText{
+    color: var(--font-color-user-input);
+    opacity: 50%;
+
+}
+
+::placeholder{
+    color: var(--font-color-user-input);
+    opacity: 50%;
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+input{
+    min-width: 100%;
+    font-size: var(--font-size-user-input);
+    color: var(--font-color-user-input);
+    border: none;
+    border-bottom: 2px dotted #FFF;
+    background: none;
+}
+
+.validationBlock{
+    color: var(--font-color-user-validation);
+    opacity: 80%;
+    padding-bottom: 2rem;
+    visibility: hidden;
+}
+
+#buttonAddBook{
+    border: none;
+    min-width: min-content;
+    max-width: fit-content;
+    background-color: #0F2027;
+    padding: 1rem;
+    align-self: center;
+}
+
+#buttonAddBook:hover{
+    cursor: pointer;
+    background-color: #0E1016;
 }
 
 footer{
