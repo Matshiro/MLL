@@ -21,10 +21,31 @@
     </aside>
     <main>
         <section id="infoBooks">
-            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+            <div id="infoRead" class="infoSpace">BOOKS READ: 0</div>
+            <div id="infoUnread" class="infoSpace">BOOKS UNREAD: 0</div>
+            <div id="infoTotal" class="infoSpace">TOTAL BOOKS: 0</div>
+            <div id="infoTotalPages" class="infoSpace">TOTAL PAGES: 0</div>
+        </section>
+        <section id="sorting">
+            Sort by:
+            <select id="sortBy">
+                <option value="timeAdded">Time Added</option>
+                <option value="bookPublished">Date of publishing book</option>
+                <option value="nameOfBook">Book Name</option>
+                <option value="nameOfAuthor">Autor Name</option>
+                <option value="pagesUnread">Pages Unread</option>
+            </select>
         </section>
         <section id="booksGrid">
-            bbbbbbbbbbbbbbbb
+            <div class="gridBox">
+                <div class="boxRow" id="bookTitle">Title</div>
+                <div class="boxRow" id="bookAuthor">Author</div>
+                <div class="boxRow" id="bookPublished">Published:</div>
+                <div class="boxRow" id="bookPagesNr">Number of Pages:</div>
+                <div class="boxRow" id="bookPagesRead">Pages Read:</div>
+                <div class="boxRow" id="bookPagesLeft">Pages Left:</div>
+            </div>
+            </div>
         </section>
     </main>
 </body>
