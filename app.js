@@ -5,14 +5,14 @@ const booksTotalValue = document.getElementById("infoTotal");
 const booksTotalPagesValue = document.getElementById("infoTotalPages");
 
 const booksGrid = document.getElementById("booksGrid");
-
+const sorting = document.getElementById("sortBy");
 
 let myLibrary = [];
 let totalBooks = 0;
 let totalPages = 0;
 let booksRead = 0;
 let booksUnread = 0;
-
+let selectedSort = "nameOfBook";
 
 function handleSubmit(event){
 
@@ -28,72 +28,133 @@ function handleSubmit(event){
     let book = [bookTitle, bookAuthor, bookPublished, bookPages, bookRead]
     myLibrary.push(book);
 
-    addNewBook(bookTitle, bookAuthor, bookPublished, bookPages, bookRead);
+    selectSort();
 
     event.target.reset();
 }
 
+sorting.addEventListener("change", function(){
+    selectedSort = this.value;
+    selectSort();
+});
 
-function addNewBook(title, author, published, pages, read){
+function selectSort(){
 
-    let newGridBox = document.createElement("div");
-    newGridBox.className = "gridBox";
-    newGridBox.id = title;
-    if (read != "no"){
-        newGridBox.classList.add("read");
-        addRead();
+
+    if (selectedSort === "nameOfBook"){
+        sortArray(0);
     }
-    else{
-        newGridBox.classList.add("unread");
-        addUnread();
+    if (selectedSort === "nameOfAuthor"){
+        sortArray(1);
+    }
+    if (selectedSort === "bookPublished"){
+        sortArray(2);
+    }
+}
+
+function sortArray(value){
+    if (myLibrary.length <= 0){
+        createBox();
+        return;
     }
 
-    addPages(pages);
-    addTotal();
+    myLibrary.sort((a, b) => {
+        const nameA = a[value][0].toUpperCase();
+        const nameB = b[value][0].toUpperCase();
+        return nameA.localeCompare(nameB);
+    });
+    removeExistingBoxes();
+    createBox();
+    addBook();
+}
 
-    var bookTitle = document.createElement("div");
-    bookTitle.className = "boxRow";
-    bookTitle.id = "bookTitle";
-    bookTitle.textContent = title;
-    newGridBox.appendChild(bookTitle);
-    
-    var bookAuthor = document.createElement("div");
-    bookAuthor.className = "boxRow";
-    bookAuthor.id = "bookAuthor";
-    bookAuthor.textContent = author;
-    newGridBox.appendChild(bookAuthor);
-    
-    var bookPublished = document.createElement("div");
-    bookPublished.className = "boxRow";
-    bookPublished.id = "bookPublished";
-    bookPublished.textContent = published;
-    newGridBox.appendChild(bookPublished);
-    
-    var bookPagesNr = document.createElement("div");
-    bookPagesNr.className = "boxRow";
-    bookPagesNr.id = "bookPagesNr";
-    bookPagesNr.textContent = parseInt(pages);
-    newGridBox.appendChild(bookPagesNr);
-    
-    var bookDelete = document.createElement("button");
-    bookDelete.className = "bookDelete";
-    bookDelete.addEventListener('click', function(){
-        let gridBox = bookDelete.closest('.gridBox');
-        removeBook(title, pages, read);
-        gridBox.remove();
-    })
+function removeExistingBoxes(){
+    while (booksGrid.firstChild) {
+        booksGrid.removeChild(booksGrid.firstChild);
+      }
+}
 
-    var trashbin = document.createElement("img");
-    trashbin.id = "trashbin";
-    trashbin.src = "./images/trashbin.png";
-    trashbin.alt = "Trashbin icon";
-    bookDelete.appendChild(trashbin);
-    newGridBox.appendChild(bookDelete);
+function createBox(){
 
-    console.log(newGridBox);
-    booksGrid.appendChild(newGridBox);
+    myLibrary.forEach(element => {
+        let newGridBox = document.createElement("div");
+        let title = element[0];
+        let author = element[1];
+        let published = element[2];
+        let pages = element[3];
+        let read = element[4];
 
+        newGridBox.className = "gridBox";
+        newGridBox.id = title;
+        if (read != "no"){
+            newGridBox.classList.add("read");
+        }
+        else{
+            newGridBox.classList.add("unread");
+        }
 
+        var bookTitle = document.createElement("div");
+        bookTitle.className = "boxRow";
+        bookTitle.id = "bookTitle";
+        bookTitle.textContent = title;
+        newGridBox.appendChild(bookTitle);
+        
+        var bookAuthor = document.createElement("div");
+        bookAuthor.className = "boxRow";
+        bookAuthor.id = "bookAuthor";
+        bookAuthor.textContent = author;
+        newGridBox.appendChild(bookAuthor);
+        
+        var bookPublished = document.createElement("div");
+        bookPublished.className = "boxRow";
+        bookPublished.id = "bookPublished";
+        bookPublished.textContent = published;
+        newGridBox.appendChild(bookPublished);
+        
+        var bookPagesNr = document.createElement("div");
+        bookPagesNr.className = "boxRow";
+        bookPagesNr.id = "bookPagesNr";
+        bookPagesNr.textContent = parseInt(pages);
+        newGridBox.appendChild(bookPagesNr);
+        
+        var bookDelete = document.createElement("button");
+        bookDelete.className = "bookDelete";
+        bookDelete.addEventListener('click', function(){
+            let gridBox = bookDelete.closest('.gridBox');
+            removeBook(title, pages, read);
+            gridBox.remove();
+        })
+
+        var trashbin = document.createElement("img");
+        trashbin.id = "trashbin";
+        trashbin.src = "./images/trashbin.png";
+        trashbin.alt = "Trashbin icon";
+        bookDelete.appendChild(trashbin);
+        newGridBox.appendChild(bookDelete);
+
+        booksGrid.appendChild(newGridBox);
+
+        });
+
+}
+
+function addBook(){
+    totalBooks = 0;
+    totalPages = 0;
+    booksRead = 0;
+    booksUnread = 0;
+    myLibrary.forEach(element => {
+        
+        addTotal();
+        addPages(element[3]);
+        console.log(element[4]);
+        if (element[4] === "no"){
+            addUnread();
+        }
+        if (element[4] === "yes"){
+            addRead();
+        }
+    });
 }
 
 function addRead(){
@@ -103,7 +164,7 @@ function addRead(){
 
 function addUnread(){
     booksUnread++;
-    booksUnreadValue.lastChild.textContent = booksRead;
+    booksUnreadValue.lastChild.textContent = booksUnread;
 }
 
 function addPages(pages){
@@ -121,7 +182,7 @@ function removeBook(title, pages, read){
     if (read === "yes"){
         removeRead();
     }
-    else{
+    if (read === "no"){
         removeUnread();
     }
     removePages(pages);
@@ -141,11 +202,11 @@ function removeRead(){
 
 function removeUnread(){
     booksUnread--;
-    booksUnreadValue.lastChild.textContent = booksRead;
+    booksUnreadValue.lastChild.textContent = booksUnread;
 }
 
 function removePages(pages){
-    totalPages += parseInt(pages);
+    totalPages -= parseInt(pages);
     booksTotalPagesValue.lastChild.textContent = totalPages;
 
 }
