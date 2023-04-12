@@ -155,6 +155,7 @@ main{
 }
 
 .infoSpace{
+    display: flex;
     max-width: 25%;
 }
 
@@ -217,7 +218,7 @@ main{
     font-weight: 600;
 }
 
-@media screen and (max-height: 1000px)  {
+@media screen and (max-height: 800px)  {
     #logo{
         padding:0;
     }
@@ -225,7 +226,7 @@ main{
     #userInfo{
     padding: 0;
     }   
-    
+
     #buttonAddBook{
         padding: 0.5em;
     }
